@@ -53,8 +53,6 @@ public class Robot implements IRobot {
     public void moveForward(Number number) {
 
         Log.log("Robot: Moving from (" + this.position + ") ");
-        // Draw current position if penDown
-        setPosition(this.position);
         IPositionActions position;
         for (int i = 1; i <= number.getValue(); ++i) {
             
@@ -78,10 +76,14 @@ public class Robot implements IRobot {
                     throw new RuntimeException("Unknown direction: " + this.position.getDirection());
             }
             
-            position = Position.updatePosition((IPosition)this.position, x, y);
+            position = new Position(new Number(this.position.getXPosition().getValue() + x), 
+                    new Number(this.position.getYPosition().getValue() + y), 
+                    Direction.getDirection("x"));//         ))Position.updatePosition((IPosition)this.position, x, y);
+            System.out.println("Log this: " + position);
             if (grid.legalMove(position)) {
                 this.setPosition(position);
             } else {
+                System.out.println("hei hoi");
                 break;
             }
             
@@ -93,6 +95,7 @@ public class Robot implements IRobot {
     private void setPosition(IPositionActions position) {
         this.position = position;
         if (penDown) {
+            System.out.println("Adding to positions: " + position);
             this.positions.add(position);
         }
     }

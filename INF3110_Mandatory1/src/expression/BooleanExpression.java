@@ -44,13 +44,13 @@ public class BooleanExpression extends Expression {
     
     @Override
     public int getValue() {
-        
-        if (isEvaluated()) {
-            return this.value;
-        } else {
-            super.setEvaluated(true);
-            this.interpret();
-            return getValue();
-        }
+        super.setEvaluated(true);
+        this.interpret();
+        return this.value;
     }  
+    
+    @Override
+    public String toString() {
+        return exp1 + " " + rel +  " " + exp2;
+    }
 }

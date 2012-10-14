@@ -10,10 +10,10 @@ package log;
  */
 public class Log {
     public static void logln(String msg) {
-        System.out.println(msg);
+    //    System.out.println(msg);
     }
     
     public static void log(String msg) {
-        System.out.print(msg);
+   //     System.out.print(msg);
     }
 }

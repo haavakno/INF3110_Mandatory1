@@ -23,7 +23,7 @@ public class PlusExpression extends Expression {
     @Override 
     public void interpret() {      
         super.interpret();;
-        
+
         int value1 = exp1.getValue();
         int value2 = exp2.getValue();
 

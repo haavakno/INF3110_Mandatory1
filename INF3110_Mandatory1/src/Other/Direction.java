@@ -13,17 +13,16 @@ import java.util.LinkedList;
  */
 public enum Direction {
     
-    LEFT("-x", '<'), 
-    RIGHT("x", '>'),
-    UP("y", '^'),
-    DOWN("-y", 'v');
+    LEFT("-x"), 
+    RIGHT("x"),
+    UP("y"),
+    DOWN("-y");
     
     private String value;
     private char charValue;
     
-    private Direction(String value, char charValue) {
+    private Direction(String value) {
         this.value = value;
-        this.charValue = charValue;
     }
     
     public static Direction getDirection(String value) {
@@ -36,11 +35,18 @@ public enum Direction {
     }
     
     public static char getCharValue(Direction d) {
-        for (Direction dir : Direction.values()) {
-            if (dir == d) {
-                return dir.charValue;
-            }
+        switch (d) {
+            case LEFT:
+                return '<';
+            case RIGHT:
+                return '>';
+            case UP:
+                return '^';
+            case DOWN:
+                return 'x';
+            default:
+                throw new RuntimeException("Unknown direction: " + d);
         }
-        throw new RuntimeException("Unknown direction: " + d);
+        
     }
 }

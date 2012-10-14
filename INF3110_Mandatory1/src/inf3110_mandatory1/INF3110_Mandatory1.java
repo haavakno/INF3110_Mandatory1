@@ -8,6 +8,7 @@ import Other.Direction;
 import Other.Operator;
 import Other.Size;
 import Other.VarDecl;
+import expression.BooleanExpression;
 import expression.Identifier;
 import interfaces.IGrid;
 import interfaces.IRobot;
@@ -24,6 +25,8 @@ import statement.PenDown;
 import statement.PenUp;
 import statement.Right;
 import statement.Start;
+import statement.StatementList;
+import statement.While;
 
 /**
  *
@@ -47,9 +50,10 @@ public class INF3110_Mandatory1 {
         Identifier ii = new Identifier("ii");
         Identifier jj = new Identifier("jj");
         Identifier kk = new Identifier("kk");
-        p.addStatement(new Start(new Number(3), new Number(3), Direction.getDirection("-x")));
+        p.addStatement(new Start(new Number(0), new Number(11), Direction.getDirection("y")));
         p.addStatement(new PenDown());
-        p.addStatement(new Forward(new Number(1)));
+        
+/*        p.addStatement(new Forward(new Number(1)));
         p.addStatement(new PenUp());
         p.addStatement(new Right(new Number(2)));
         p.addStatement(new PenDown());
@@ -68,8 +72,17 @@ public class INF3110_Mandatory1 {
         p.addStatement(new Forward(kk));
         p.addStatement(new Assignment(jj, new Number(3)));
         p.addStatement(new Left(kk));
-        p.addStatement(new Forward(new PlusExpression(Operator.getOperator("+"), jj, kk)));
+        p.addStatement(new Forward(new PlusExpression(Operator.getOperator("+"), jj, kk)));*/
+        p.addVarDecl(new VarDecl(jj, new Number(3)));
+        p.addStatement(new Assignment(jj, new Number(11)));
+        p.addStatement(new Right(jj));
+        p.addStatement(new Right(jj));
+//        p.addStatement(new Right(jj));
+        StatementList st = new StatementList();
+        st.addStatement(new Right(jj));
+        st.addStatement(new Assignment(jj, new PlusExpression(Operator.getOperator("-"), jj, new Number(1))));
 
+//        p.addStatement(new While(new BooleanExpression(Operator.getOperator(">"), jj, new Number(0)), st));
         p.interpret();
     }
 }
