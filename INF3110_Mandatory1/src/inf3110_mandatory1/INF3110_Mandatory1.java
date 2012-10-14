@@ -5,6 +5,7 @@
 package inf3110_mandatory1;
 
 import Other.Direction;
+import Other.Operator;
 import Other.Size;
 import Other.VarDecl;
 import expression.Identifier;
@@ -14,6 +15,8 @@ import program.Grid;
 import program.Program;
 import program.Robot;
 import expression.Number;
+import expression.PlusExpression;
+import statement.Assignment;
 import statement.Backward;
 import statement.Forward;
 import statement.Left;
@@ -54,13 +57,19 @@ public class INF3110_Mandatory1 {
         p.addStatement(new Backward(new Number(3)));
         p.addStatement(new Left(new Number(2)));
         p.addStatement(new Left(new Number(2)));
-        p.addStatement(new Left(new Number(10)));
+        p.addStatement(new Left(new Number(8)));
         p.addVarDecl(new VarDecl(ii, new Number(5)));
         p.addVarDecl(new VarDecl(jj, ii));
         p.addVarDecl(new VarDecl(kk, jj));
         p.addStatement(new Right(ii));
         p.addStatement(new Right(jj));
         p.addStatement(new Backward(kk));
+        p.addStatement(new Assignment(ii, new Number(1)));
+        p.addStatement(new Forward(kk));
+        p.addStatement(new Assignment(jj, new Number(3)));
+        p.addStatement(new Left(kk));
+        p.addStatement(new Forward(new PlusExpression(Operator.getOperator("+"), jj, kk)));
+
         p.interpret();
     }
 }

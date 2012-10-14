@@ -102,9 +102,9 @@ public class Grid implements IGrid {
             case LEFT:
                 return 0 < position.getXPosition().getValue();
             case RIGHT:
-                return position.getXPosition().getValue() < size.getXBounds().getValue();
+                return position.getXPosition().getValue() <= size.getXBounds().getValue();
             case UP:
-                return position.getYPosition().getValue() < size.getYBounds().getValue();
+                return position.getYPosition().getValue() <= size.getYBounds().getValue();
             case DOWN:
                 return 0 < position.getYPosition().getValue();
             default:

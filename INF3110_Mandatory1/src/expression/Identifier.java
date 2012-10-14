@@ -12,7 +12,6 @@ public class Identifier extends Expression {
 
     private String identifier;
     private VarDecl vd = null;
-    private boolean evaluated = false;
     
     public Identifier(String identifier) {
         this.identifier = identifier;
@@ -21,13 +20,13 @@ public class Identifier extends Expression {
     @Override
     public int getValue() {
         
-        if (evaluated) {
+        if (isEvaluated()) {
             if (vd == null) {
                 throw new RuntimeException("Variable not declared: " + this);
             }
             return vd.getValue();
         } else {
-            evaluated = true;
+            setEvaluated(true);
             interpret();
             return getValue();
         }

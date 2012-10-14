@@ -53,5 +53,10 @@ public class VarDecl implements Handler {
     public int getValue() {
         return this.exp.getValue();
     }
+
+    public void setExpression(IExpression exp) {
+        identifier.setEvaluated(true);
+        this.exp = exp;
+    }
     
 }

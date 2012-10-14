@@ -13,6 +13,8 @@ import interfaces.IExpression;
 abstract class Expression implements IExpression {
 
     private boolean printed = false;
+    private boolean evaluated = false;
+    
     @Override
     public void interpret() {
    //     prettyPrint();
@@ -29,6 +31,14 @@ abstract class Expression implements IExpression {
             setPrinted();
             System.out.println(this);
         }
+    }
+    
+    public void setEvaluated(boolean value) {
+        this.evaluated = value;
+    }
+    
+    protected boolean isEvaluated() {
+        return this.evaluated;
     }
     
 }

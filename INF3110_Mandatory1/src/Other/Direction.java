@@ -4,50 +4,43 @@
  */
 package Other;
 
+import java.util.Collection;
+import java.util.LinkedList;
+
 /**
  *
  * @author haavakno
  */
 public enum Direction {
     
-    LEFT("-x"), 
-    RIGHT("x"),
-    UP("y"),
-    DOWN("-y");
+    LEFT("-x", '<'), 
+    RIGHT("x", '>'),
+    UP("y", '^'),
+    DOWN("-y", 'v');
     
     private String value;
-    private Direction(String value) {
+    private char charValue;
+    
+    private Direction(String value, char charValue) {
         this.value = value;
+        this.charValue = charValue;
     }
     
     public static Direction getDirection(String value) {
-       
-        if (value.equals(LEFT.value)) {
-            return LEFT;
-        } else if (value.equals(RIGHT.value)) {
-            return RIGHT;
-        } else if (value.equals(UP.value)) {
-            return UP;
-        } else if (value.equals(DOWN.value)) {
-            return DOWN;
-        } else {
-            throw new RuntimeException("Unknown direction: " + value);
-        }
+       for (Direction d : Direction.values()) {
+           if (d.value.equals(value)) {
+               return d;
+           }
+       }
+       throw new RuntimeException("Unknown direction: " + value);
     }
     
     public static char getCharValue(Direction d) {
-        switch (d) {
-            case LEFT:
-                return '<';
-            case RIGHT:
-                return '>';
-            case UP:
-                return '^';
-            case DOWN:
-                return 'v';
-            default:
-                throw new RuntimeException("Unknown direction: " + d);
+        for (Direction dir : Direction.values()) {
+            if (dir == d) {
+                return dir.charValue;
+            }
         }
-        
+        throw new RuntimeException("Unknown direction: " + d);
     }
 }
