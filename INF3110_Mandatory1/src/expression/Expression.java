@@ -12,19 +12,23 @@ import interfaces.IExpression;
  */
 abstract class Expression implements IExpression {
 
+    private boolean printed = false;
     @Override
     public void interpret() {
-        throw new UnsupportedOperationException("Not supported yet.");
+   //     prettyPrint();
     }
     
     @Override
     public void setPrinted() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        this.printed = true;
     }
     
     @Override
     public void prettyPrint() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        if (!printed) {
+            setPrinted();
+            System.out.println(this);
+        }
     }
     
 }

@@ -11,5 +11,4 @@ import interfaces.IRobot;
  * @author haavakno
  */
 public interface IStatement extends Handler {
-    public void setRobot(IRobot robot);
 }

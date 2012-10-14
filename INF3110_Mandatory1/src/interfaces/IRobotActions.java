@@ -11,7 +11,7 @@ import expression.Number;
  *
  * @author haavakno
  */
-interface IRobotActions extends Handler {
+public interface IRobotActions extends Handler {
     public void moveBackward(Number number);
     public void moveForward(Number number);
     public void moveRight(Number number);

@@ -14,9 +14,20 @@ import interfaces.IPositionActions;
  */
 public class Position implements IPosition, IPositionActions {
 
+    public static IPositionActions updatePosition(IPosition position, int x, int y) {
+        return new Position(x + position.getXPosition().getValue(), 
+                y + position.getYPosition().getValue(), position.getDirection());
+    }
+
     private Number xPosition;
     private Number yPosition;
     private Direction direction;
+    
+    private Position(int x, int y, Direction direction) {
+        this.xPosition = new Number(x);
+        this.yPosition = new Number(y);
+        this.direction = direction;
+    }
     
     public Position(Number xPosition, Number yPosition, Direction direction) {
         this.xPosition = new Number(xPosition);
@@ -113,5 +124,10 @@ public class Position implements IPosition, IPositionActions {
         } else {
             return 0;
         }
+    }
+    
+    @Override
+    public String toString() {
+        return this.getXPosition() + "," + this.getYPosition() + "," + this.getDirection();
     }
 }

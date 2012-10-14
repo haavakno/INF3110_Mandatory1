@@ -6,6 +6,8 @@ package program;
 
 import Other.Direction;
 import Other.Position;
+import Other.VarDecl;
+import expression.Identifier;
 import interfaces.Handler;
 import interfaces.IGrid;
 import interfaces.IPosition;
@@ -13,10 +15,12 @@ import interfaces.IPrettyPrint;
 import interfaces.IRobot;
 import interfaces.IStatement;
 import expression.Number;
+import interfaces.IPositionActions;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
+import log.Log;
 
 /**
  *
@@ -24,20 +28,13 @@ import java.util.Map;
  */
 public class Robot implements IRobot {
 
+    public final static Map<Identifier, VarDecl> globalVariableDeclarations = new HashMap<Identifier, VarDecl>();
+
     private IGrid grid;
-    private IPosition position;
+    private IPositionActions position = null;
+    private boolean penDown = false;
 
     private Collection<IPosition> positions = new LinkedList<IPosition>();
-   
-    public Robot(IPosition position) {
-        this.position = position;
-        positions.add(position);
-    }
-    
-    public Robot(Number xPosition, Number yPosition, Direction direction) {
-        this.position = new Position(xPosition, yPosition, direction);
-        positions.add(position);
-    }
     
     @Override
     public void interpret() {
@@ -48,32 +45,91 @@ public class Robot implements IRobot {
 
     @Override
     public void moveBackward(Number number) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        this.position.turnAround();
+        this.moveForward(number);
     }
 
     @Override
     public void moveForward(Number number) {
-        throw new UnsupportedOperationException("Not supported yet.");
+
+        Log.log("Robot: Moving from (" + this.position + ") ");
+        // Draw current position if penDown
+        setPosition(this.position);
+        IPositionActions position;
+        for (int i = 1; i <= number.getValue(); ++i) {
+            
+            int x = 0;//this.position.getXPosition().getValue();
+            int y = 0;//this.position.getYPosition().getValue();
+            
+            switch (this.position.getDirection()) {
+                case LEFT:
+                    x--;
+                    break;
+                case RIGHT:
+                    x++;
+                    break;
+                case UP:
+                    y++;
+                    break;
+                case DOWN:
+                    y--;
+                    break;
+                default:
+                    throw new RuntimeException("Unknown direction: " + this.position.getDirection());
+            }
+            
+            position = Position.updatePosition((IPosition)this.position, x, y);
+            if (grid.legalMove(position)) {
+                this.setPosition(position);
+            } else {
+                break;
+            }
+            
+        }
+        
+        Log.logln("to (" + this.position + ")");
+    }
+    
+    private void setPosition(IPositionActions position) {
+        this.position = position;
+        if (penDown) {
+            this.positions.add(position);
+        }
+    }
+    
+    @Override
+    public void setStartPosition(Number xBounds, Number yBounds, Direction direction) {
+        IPositionActions position = new Position(xBounds, yBounds, direction);
+        if (grid.legalMove(position)) {
+            this.position = position;
+            positions.add(position);
+        } else {
+            throw new RuntimeException("Start position outside of grid: " + position);
+        }
+        Log.logln("Robot: Starting at (" + position + ")");
+
     }
 
     @Override
     public void moveRight(Number number) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        this.position.turnRight();
+        this.moveForward(number);
     }
 
     @Override
     public void moveLeft(Number number) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        this.position.turnLeft();
+        this.moveForward(number);
     }
 
     @Override
     public void penDown() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        this.penDown = true;
     }
 
     @Override
     public void penUp() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        this.penDown = false;
     }
 
     @Override
@@ -100,4 +156,9 @@ public class Robot implements IRobot {
     public Collection<IPosition> getPositions() {
         return this.positions;
     }   
+
+    @Override
+    public void addVarDecl(VarDecl vd) {
+        globalVariableDeclarations.put(vd.getIdentifier(), vd);
+    }
 }

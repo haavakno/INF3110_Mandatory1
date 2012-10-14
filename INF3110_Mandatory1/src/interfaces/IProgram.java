@@ -4,6 +4,7 @@
  */
 package interfaces;
 
+import Other.VarDecl;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -13,4 +14,5 @@ import java.util.List;
  */
 public interface IProgram extends Handler {
     public void addStatement(IStatement statement);
+    public void addVarDecl(VarDecl vd);
 }

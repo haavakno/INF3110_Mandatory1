@@ -4,12 +4,14 @@
  */
 package program;
 
+import Other.VarDecl;
 import interfaces.Handler;
 import interfaces.IGrid;
 import interfaces.IPrettyPrint;
 import interfaces.IProgram;
 import interfaces.IRobot;
 import interfaces.IStatement;
+import statement.Statement;
 
 /**
  *
@@ -25,6 +27,7 @@ public class Program implements IProgram {
         this.grid  = grid;
         this.robot.setGrid(this.grid);
         this.grid.setRobot(this.robot);
+        Statement.robot = this.robot;
     }
 
     @Override
@@ -46,5 +49,10 @@ public class Program implements IProgram {
     @Override
     public void addStatement(IStatement statement) {
         robot.addStatement(statement);
+    }
+
+    @Override
+    public void addVarDecl(VarDecl vd) {
+        this.robot.addVarDecl(vd);
     }
 }

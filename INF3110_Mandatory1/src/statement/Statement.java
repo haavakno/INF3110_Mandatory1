@@ -8,6 +8,7 @@ import interfaces.IStatement;
 import interfaces.Handler;
 import interfaces.IPrettyPrint;
 import interfaces.IRobot;
+import interfaces.IRobotActions;
 
 /**
  *
@@ -15,7 +16,7 @@ import interfaces.IRobot;
  */
 public class Statement implements IStatement {
 
-    private IRobot robot;
+    public static IRobot robot = null;
     private State  state;
     private boolean printed = false;
 
@@ -52,9 +53,8 @@ public class Statement implements IStatement {
         
     }
     
-    @Override
-    public void setRobot(IRobot robot) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    protected IRobotActions getRobot() {
+        return this.robot;
     }
     
 }

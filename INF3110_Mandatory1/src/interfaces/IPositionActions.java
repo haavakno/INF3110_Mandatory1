@@ -8,7 +8,7 @@ package interfaces;
  *
  * @author haavakno
  */
-public interface IPositionActions {
+public interface IPositionActions extends IPosition {
     public void turnLeft();
     public void turnRight();
     public void turnAround();

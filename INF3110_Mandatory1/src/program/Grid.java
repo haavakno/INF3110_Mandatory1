@@ -6,7 +6,6 @@ package program;
 
 import Other.Direction;
 import Other.Size;
-import com.sun.xml.internal.ws.util.StringUtils;
 import interfaces.IRobot;
 import interfaces.IGrid;
 import interfaces.IPrettyPrint;
@@ -62,7 +61,7 @@ public class Grid implements IGrid {
     public String toString() {
         
         StringBuilder sb = new StringBuilder();
-        sb.append(getHorizontalLine());
+       
         int xMax = size.getXBounds().getValue();
         int yMax = size.getYBounds().getValue();
         IPosition position = null;
@@ -71,11 +70,12 @@ public class Grid implements IGrid {
         Arrays.fill(grid, '.');
 
         for (IPosition p: this.robot.getPositions()) {
-            int index = (p.getXPosition().getValue() - 1) + (p.getYPosition().getValue() - 1) * xMax;
-            System.out.println("hei hei");
+            int index = (p.getXPosition().getValue() - 1) + (yMax - p.getYPosition().getValue()) * xMax;
             grid[index] = Direction.getCharValue(p.getDirection());
         }
         
+        sb.append(getHorizontalLine());
+         
         for (int i = 0; i < grid.length; ++i) {
             
             if (i%xMax == 0) {
@@ -85,19 +85,31 @@ public class Grid implements IGrid {
                     sb.append("# ");
             }
             
-           // if (i != 0 && i%xMax == 0) {
-  //              sb.append("#\n");
-//            }
-            
             sb.append(grid[i]);
             sb.append(" ");                    
         }
       
-          sb.append("#\n");
+        sb.append("#\n");
         sb.append(getHorizontalLine());
 
       
         return sb.toString();
+    }
+
+    @Override
+    public boolean legalMove(IPosition position) {
+        switch (position.getDirection()) {
+            case LEFT:
+                return 0 < position.getXPosition().getValue();
+            case RIGHT:
+                return position.getXPosition().getValue() < size.getXBounds().getValue();
+            case UP:
+                return position.getYPosition().getValue() < size.getYBounds().getValue();
+            case DOWN:
+                return 0 < position.getYPosition().getValue();
+            default:
+                throw new RuntimeException("Unknown direction: " + position.getDirection());
+        }
     }
     
     

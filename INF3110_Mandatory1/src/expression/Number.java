@@ -21,4 +21,8 @@ public class Number extends Expression {
     public int getValue() {
         return this.value;
     }
+    
+    public String toString() {
+        return Integer.toString(value);
+    }
 }
