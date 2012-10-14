@@ -19,8 +19,12 @@ public class Identifier extends Expression {
     
     @Override
     public int getValue() {
+        if (Robot.globalVariableDeclarations.get(this) == null) {
+            throw new RuntimeException("Identifier has no declaration: " + this);
+        }
         
-        if (isEvaluated()) {
+        return Robot.globalVariableDeclarations.get(this).getValue();
+   /*     if (isEvaluated()) {
             if (vd == null) {
                 throw new RuntimeException("Variable not declared: " + this);
             }
@@ -29,13 +33,14 @@ public class Identifier extends Expression {
             setEvaluated(true);
             interpret();
             return getValue();
-        }
+        }*/
     }
     
     @Override
     public void interpret() {
         super.interpret();
-        vd = Robot.globalVariableDeclarations.get(this);
+        System.out.println("Evaluating: " + this);
+      //  vd = Robot.globalVariableDeclarations.get(this);
     }
     
     @Override

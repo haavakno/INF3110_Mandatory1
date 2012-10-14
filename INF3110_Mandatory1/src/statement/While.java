@@ -31,7 +31,7 @@ public class While extends Statement {
     
     @Override
     public String toString() {
-        return "while(" + boolExp + ") {\n" + statementList + "\n}";
+        return "while(" + boolExp + ") {\n" + statementList + "}";
     }
     
 }

@@ -43,10 +43,13 @@ public enum Direction {
             case UP:
                 return '^';
             case DOWN:
-                return 'x';
+                return 'v';
             default:
                 throw new RuntimeException("Unknown direction: " + d);
         }
-        
+    }
+    
+    public String toString() {
+        return this.value;
     }
 }

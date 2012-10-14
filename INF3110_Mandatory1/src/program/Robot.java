@@ -21,6 +21,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 import log.Log;
+import statement.StatementList;
 
 /**
  *
@@ -28,16 +29,26 @@ import log.Log;
  */
 public class Robot implements IRobot {
 
-    public final static Map<Identifier, VarDecl> globalVariableDeclarations = new HashMap<Identifier, VarDecl>();
-
+    public static Map<Identifier, VarDecl> globalVariableDeclarations = new HashMap<Identifier, VarDecl>();
+    private StatementList statementList = new StatementList();
+    
     private IGrid grid;
     private IPositionActions position = null;
     private boolean penDown = false;
 
     private Collection<IPosition> positions = new LinkedList<IPosition>();
+
+    public Robot() {
+         Robot.globalVariableDeclarations.clear();
+         this.positions.clear();
+    }
     
     @Override
     public void interpret() {
+        for (Handler varDecl : globalVariableDeclarations.values()) {
+            varDecl.interpret();;
+        }
+        
         for (Handler statement : statementList) {
             statement.interpret();
         }
@@ -76,14 +87,10 @@ public class Robot implements IRobot {
                     throw new RuntimeException("Unknown direction: " + this.position.getDirection());
             }
             
-            position = new Position(new Number(this.position.getXPosition().getValue() + x), 
-                    new Number(this.position.getYPosition().getValue() + y), 
-                    Direction.getDirection("x"));//         ))Position.updatePosition((IPosition)this.position, x, y);
-            System.out.println("Log this: " + position);
-            if (grid.legalMove(position)) {
+            position = Position.updatePosition((IPosition)this.position, x, y);
+               if (grid.legalMove(position)) {
                 this.setPosition(position);
             } else {
-                System.out.println("hei hoi");
                 break;
             }
             
@@ -95,13 +102,11 @@ public class Robot implements IRobot {
     private void setPosition(IPositionActions position) {
         this.position = position;
         if (penDown) {
-            System.out.println("Adding to positions: " + position);
             this.positions.add(position);
-        }
+        } 
     }
     
-    @Override
-    public void setStartPosition(Number xBounds, Number yBounds, Direction direction) {
+    private void setStartPosition(Number xBounds, Number yBounds, Direction direction) {
         IPositionActions position = new Position(xBounds, yBounds, direction);
         if (grid.legalMove(position)) {
             this.position = position;
@@ -152,7 +157,7 @@ public class Robot implements IRobot {
 
     @Override
     public void addStatement(IStatement statement) {
-        statementList.add(statement);
+        statementList.addStatement(statement);
     }
 
     @Override
@@ -163,5 +168,20 @@ public class Robot implements IRobot {
     @Override
     public void addVarDecl(VarDecl vd) {
         globalVariableDeclarations.put(vd.getIdentifier(), vd);
+    }
+
+    @Override
+    public void start(Number x, Number y, Direction dir) {
+        this.setStartPosition(x, y, dir);
+    }
+
+    @Override
+    public void stop() {
+        this.grid.interpret();
+    }
+    
+    @Override
+    public String toString() {
+        return this.position.toString();
     }
 }

@@ -18,4 +18,6 @@ public interface IRobotActions extends Handler {
     public void moveLeft(Number number);
     public void penDown();
     public void penUp();
+    public void start(Number x, Number y, Direction dir);
+    public void stop();
 }

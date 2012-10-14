@@ -27,7 +27,7 @@ public class Start extends Statement {
     @Override
     public void interpret() {
         super.interpret();
-        super.robot.setStartPosition(new Number(exp1.getValue()), new Number(exp2.getValue()), direction);
+        super.robot.start(new Number(exp1.getValue()), new Number(exp2.getValue()), direction);
     }
     
     @Override

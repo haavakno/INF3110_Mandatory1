@@ -71,7 +71,7 @@ public class Grid implements IGrid {
 
         for (IPosition p: this.robot.getPositions()) {
             int index = p.getXPosition().getValue() + (yMax - p.getYPosition().getValue() - 1) * xMax;
-            System.out.println(index + " " + p);
+   //         int index = p.getXPosition().getValue() + p.getYPosition().getValue() * xMax;
 //            System.out.println(p + " " + index);
 //            System.out.println(p.getXPosition().getValue() + " " + yMax + " " + p.getYPosition().getValue());
             grid[index] = Direction.getCharValue(p.getDirection());
@@ -101,6 +101,10 @@ public class Grid implements IGrid {
 
     @Override
     public boolean legalMove(IPosition position) {
+        
+        return 0 <= position.getXPosition().getValue() && position.getXPosition().getValue() < size.getXBounds().getValue() &&
+               0 <= position.getYPosition().getValue() && position.getYPosition().getValue() < size.getYBounds().getValue();
+   /*     System.err.println("Legal move: " + position + " ");
         switch (position.getDirection()) {
             case LEFT:
                 return 0 <= position.getXPosition().getValue();
@@ -111,8 +115,8 @@ public class Grid implements IGrid {
             case DOWN:
                 return 0 <= position.getYPosition().getValue();
             default:
-                throw new RuntimeException("Unknown direction: " + position.getDirection());
-        }
+                throw new RuntimeException("Unknown direction: " + position.getDirection());*/
+    //    }
     }
     
     

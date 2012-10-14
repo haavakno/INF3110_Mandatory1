@@ -33,7 +33,6 @@ public class Program implements IProgram {
     @Override
     public void interpret() {
         robot.interpret();
-        grid.interpret();
     }
 
     @Override

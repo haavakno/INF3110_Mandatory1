@@ -17,10 +17,8 @@ import java.util.Map;
  * @author haavakno
  */
 public interface IRobot extends IRobotActions {
-    final Collection<IStatement> statementList = new LinkedList<IStatement>();
     public void addStatement(IStatement statement);
     public void addVarDecl(VarDecl vd);
     public void setGrid(IGrid grid);
     public Collection<IPosition> getPositions();
-    public void setStartPosition(Number xBounds, Number yBounds, Direction direction);
 }

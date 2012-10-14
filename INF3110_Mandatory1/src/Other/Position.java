@@ -16,7 +16,8 @@ public class Position implements IPosition, IPositionActions {
 
     public static IPositionActions updatePosition(IPosition position, int x, int y) {
         return new Position(x + position.getXPosition().getValue(), 
-                y + position.getYPosition().getValue(), position.getDirection());
+                y + position.getYPosition().getValue(), 
+                position.getDirection());
     }
 
     private Number xPosition;
@@ -117,9 +118,10 @@ public class Position implements IPosition, IPositionActions {
     @Override
     public int compareTo(IPosition o) {
         
-        if (this.getXPosition().getValue() != o.getXPosition().getValue()) {
+
+        if (this.getYPosition().getValue() != o.getYPosition().getValue()) {
             return -1;
-        } else if (this.getYPosition().getValue() != o.getYPosition().getValue()) {
+        } else if (this.getXPosition().getValue() != o.getXPosition().getValue()) {
             return 1;
         } else {
             return 0;

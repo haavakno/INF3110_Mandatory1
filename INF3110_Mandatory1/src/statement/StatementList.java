@@ -18,8 +18,9 @@ public class StatementList implements Handler, Iterable<IStatement> {
     private final Collection<IStatement> statementList = new LinkedList<IStatement>();
     private boolean printed = false;
     
-    public void addStatement(IStatement statement) {
+    public StatementList addStatement(IStatement statement) {
         this.statementList.add(statement);
+        return this;
     }
     
     @Override
@@ -51,11 +52,12 @@ public class StatementList implements Handler, Iterable<IStatement> {
             sb.append(statement);
             sb.append("\n");
         }
+        setPrinted();
         return sb.toString();
     }
 
     @Override
-    public Iterator iterator() {
+    public Iterator<IStatement> iterator() {
         return statementList.iterator();
     }
 }

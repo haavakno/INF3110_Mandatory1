@@ -19,6 +19,10 @@ public class BooleanExpression extends Expression {
         this.exp1 = exp1;
         this.exp2 = exp2;
     }
+
+    public BooleanExpression(String string, IExpression exp1, IExpression exp2) {
+        this(Operator.getOperator(string), exp1, exp2);
+    }
     
     @Override
     public void interpret() {

@@ -19,10 +19,14 @@ public class PlusExpression extends Expression {
         this.exp1 = exp1;
         this.exp2 = exp2;
     }
+
+    public PlusExpression(String string, IExpression exp1, IExpression exp2) {
+        this(Operator.getOperator(string), exp1, exp2);
+    }
     
     @Override 
     public void interpret() {      
-        super.interpret();;
+        super.interpret();
 
         int value1 = exp1.getValue();
         int value2 = exp2.getValue();
@@ -40,6 +44,8 @@ public class PlusExpression extends Expression {
             default:
                 throw new RuntimeException("Unknown operator: " + op);
         } 
+        
+        super.setEvaluated(true);
     }
     
     @Override
