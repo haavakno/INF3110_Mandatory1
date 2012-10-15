@@ -5,12 +5,22 @@
 package statement;
 
 
+/**
+ *
+ * @author haavakno
+ */
 public class PenDown extends Statement {
 
+    /**
+     *
+     */
     public PenDown() {
         super();
     }
     
+    /**
+     *
+     */
     @Override
     public void interpret() {
         super.interpret();

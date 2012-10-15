@@ -7,12 +7,23 @@ package statement;
 import interfaces.IExpression;
 
 
+/**
+ *
+ * @author haavakno
+ */
 public class Backward extends Move {
 
+    /**
+     *
+     * @param exp
+     */
     public Backward(IExpression exp) {
         super(exp);
     }
     
+    /**
+     *
+     */
     @Override
     public void interpret() {
         super.interpret();

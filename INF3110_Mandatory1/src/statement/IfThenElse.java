@@ -7,23 +7,41 @@ package statement;
 import expression.BooleanExpression;
 
 
+/**
+ *
+ * @author haavakno
+ */
 public class IfThenElse extends Statement {
     
     private BooleanExpression boolExp;
     private StatementList ifStatements;
     private StatementList elseStatements;
     
+    /**
+     *
+     * @param boolExp
+     * @param ifStatements
+     */
     public IfThenElse(BooleanExpression boolExp, StatementList ifStatements) {
         this.boolExp = boolExp;
         this.ifStatements = ifStatements;
         this.elseStatements = null;
     }
     
+    /**
+     *
+     * @param boolExp
+     * @param ifStatements
+     * @param elseStatements
+     */
     public IfThenElse(BooleanExpression boolExp, StatementList ifStatements, StatementList elseStatements) {
         this(boolExp, ifStatements);
         this.elseStatements = elseStatements;
     }
     
+    /**
+     *
+     */
     @Override
     public void interpret() {
         super.interpret();

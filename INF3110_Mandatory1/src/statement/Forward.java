@@ -7,12 +7,23 @@ package statement;
 import interfaces.IExpression;
 import expression.Number;
 
+/**
+ *
+ * @author haavakno
+ */
 public class Forward extends Move {
 
+    /**
+     *
+     * @param exp
+     */
     public Forward(IExpression exp) {
         super(exp);
     }
     
+    /**
+     *
+     */
     @Override
     public void interpret() {
         super.interpret();

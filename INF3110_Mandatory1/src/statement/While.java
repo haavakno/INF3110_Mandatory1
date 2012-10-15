@@ -8,16 +8,28 @@ import expression.BooleanExpression;
 import interfaces.IStatement;
 
 
+/**
+ *
+ * @author haavakno
+ */
 public class While extends Statement {
 
     private BooleanExpression boolExp;
     private StatementList statementList;
     
+    /**
+     *
+     * @param boolExp
+     * @param statementList
+     */
     public While(BooleanExpression boolExp, StatementList statementList) {
         this.boolExp = boolExp;
         this.statementList = statementList;
     }
     
+    /**
+     *
+     */
     @Override 
     public void interpret() {
         super.interpret();

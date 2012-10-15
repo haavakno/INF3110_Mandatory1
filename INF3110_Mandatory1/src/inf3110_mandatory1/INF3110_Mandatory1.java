@@ -11,6 +11,9 @@ import expression.BooleanExpression;
 import expression.Identifier;
 import expression.Number;
 import expression.PlusExpression;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import program.Grid;
 import program.Program;
 import program.Robot;
@@ -21,7 +24,7 @@ import statement.*;
  * @author haavakno
  */
 public class INF3110_Mandatory1 {
-
+              
     /**
      * @param args the command line arguments
      */
@@ -38,6 +41,10 @@ public class INF3110_Mandatory1 {
         exampleWithIfThenElse(gridSize);
     }
     
+    /**
+     *
+     * @param gridSize
+     */
     public static void exampleWithIfThenElse(Size gridSize) {
         
         Robot r = new Robot();
@@ -64,6 +71,10 @@ public class INF3110_Mandatory1 {
         p.interpret();
         System.out.println("--------------------------------------");
     }
+    /**
+     *
+     * @param gridSize
+     */
     public static void exampleWithWhileLoop(Size gridSize) {
         
         Robot r = new Robot();
@@ -91,6 +102,10 @@ public class INF3110_Mandatory1 {
         System.out.println("--------------------------------------");
     }
     
+    /**
+     *
+     * @param gridSize
+     */
     public static void simpleExample(Size gridSize) {
         
         Robot r = new Robot();
@@ -107,6 +122,10 @@ public class INF3110_Mandatory1 {
         p.interpret();
         System.out.println("--------------------------------------");
     }
+    /**
+     *
+     * @param gridSize
+     */
     public static void exampleWithVariables(Size gridSize) {
         
         Robot r = new Robot();

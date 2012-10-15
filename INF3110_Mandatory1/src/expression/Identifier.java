@@ -1,22 +1,32 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package expression;
 
 import Other.VarDecl;
 import program.Robot;
 
-
+/**
+ * A robol identifier.
+ * 
+ * @author haavakno
+ */
 public class Identifier extends Expression {
 
     private String identifier;
-    private VarDecl vd = null;
     
+    /**
+     * Creates a robol identifier.
+     * 
+     * @param identifier unique name of the identifier.
+     */
     public Identifier(String identifier) {
         this.identifier = identifier;
     }
     
+    /**
+     * Returns the value associated with this identifier.
+     * 
+     * @return value of expression associated with this identifier.
+     * @throws RuntimeException
+     */
     @Override
     public int getValue() {
         if (Robot.globalVariableDeclarations.get(this) == null) {
@@ -24,23 +34,6 @@ public class Identifier extends Expression {
         }
         
         return Robot.globalVariableDeclarations.get(this).getValue();
-   /*     if (isEvaluated()) {
-            if (vd == null) {
-                throw new RuntimeException("Variable not declared: " + this);
-            }
-            return vd.getValue();
-        } else {
-            setEvaluated(true);
-            interpret();
-            return getValue();
-        }*/
-    }
-    
-    @Override
-    public void interpret() {
-        super.interpret();
-        System.out.println("Evaluating: " + this);
-      //  vd = Robot.globalVariableDeclarations.get(this);
     }
     
     @Override

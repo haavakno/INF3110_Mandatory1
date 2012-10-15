@@ -1,24 +1,16 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package Other;
 
-import interfaces.IPosition;
 import expression.Number;
+import interfaces.IPosition;
 import interfaces.IPositionActions;
 
 /**
- *
+ * Used to store a position, a position contains an x and y coordinate and
+ * a direction.
+ * 
  * @author haavakno
  */
 public class Position implements IPosition, IPositionActions {
-
-    public static IPositionActions updatePosition(IPosition position, int x, int y) {
-        return new Position(x + position.getXPosition().getValue(), 
-                y + position.getYPosition().getValue(), 
-                position.getDirection());
-    }
 
     private Number xPosition;
     private Number yPosition;
@@ -30,17 +22,47 @@ public class Position implements IPosition, IPositionActions {
         this.direction = direction;
     }
     
+    /**
+     *Creates a position object with Robol language values.
+     * 
+     * @param xPosition x coordinate of this position.
+     * @param yPosition y coordinate of this position.
+     * @param direction of this position.
+     */
     public Position(Number xPosition, Number yPosition, Direction direction) {
         this.xPosition = new Number(xPosition);
         this.yPosition = new Number(yPosition);
         this.direction = direction;
     }
     
+    /**
+     * Creates a position object from another position object.
+     * 
+     * @param position object with values for the new position.
+     */
     public Position(Position position) {
         this.xPosition = position.getXPosition();
         this.yPosition = position.getYPosition();
         this.direction = position.getDirection();
     }
+    
+    /**
+     * Returns a new position object with updated coordinates.
+     * 
+     * @param position object with coordinates to be updated.
+     * @param x value to subtract/add from objects x coordinate.
+     * @param y value to subtract/add from objects y coordinate.
+     * @return a new position object with updated coordinates.
+     */
+    public static IPositionActions updatePosition(IPosition position, int x, int y) {
+        return new Position(x + position.getXPosition().getValue(), 
+                y + position.getYPosition().getValue(), 
+                position.getDirection());
+    }
+    
+    /**
+     * @see interfaces.IPositionActions
+     */
     @Override
     public void turnLeft() {
         switch (direction) {
@@ -61,6 +83,9 @@ public class Position implements IPosition, IPositionActions {
         }
     }
 
+    /**
+     * @see interfaces.IPositionActions
+     */
     @Override
     public void turnRight() {
         turnLeft();
@@ -68,22 +93,34 @@ public class Position implements IPosition, IPositionActions {
         turnLeft();
     }
 
+    /**
+     * @see interfaces.IPositionActions
+     */
     @Override
     public void turnAround() {
         turnLeft();
         turnLeft();
     }
 
+    /**
+     * @see interfaces.IPosition
+     */
     @Override
     public Number getXPosition() {
         return new Number(this.xPosition);
     }
 
+    /**
+     * @see interfaces.IPosition
+     */
     @Override
     public Number getYPosition() {
         return new Number(this.yPosition);
     }
 
+    /**
+     * @see interfaces.IPositionActions
+     */
     @Override
     public IPosition moveForward() {
         
@@ -110,15 +147,25 @@ public class Position implements IPosition, IPositionActions {
         return new Position(this);
     }    
 
+    /**
+     * @see interfaces.IPosition
+     */
     @Override
     public Direction getDirection() {
         return this.direction;
     }
 
+   /**
+    * Compares two position objects.
+    * 
+    * @param o the position to be compared to the current.
+    * @return -1 if the Y position differs.
+    *          1 if the Y position is equal but the x position differs.
+    *          0 if both x and y position are equal.
+    */
     @Override
     public int compareTo(IPosition o) {
         
-
         if (this.getYPosition().getValue() != o.getYPosition().getValue()) {
             return -1;
         } else if (this.getXPosition().getValue() != o.getXPosition().getValue()) {

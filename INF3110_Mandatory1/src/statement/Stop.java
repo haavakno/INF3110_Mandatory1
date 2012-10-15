@@ -5,8 +5,15 @@
 package statement;
 
 
+/**
+ *
+ * @author haavakno
+ */
 public class Stop extends Statement {
     
+    /**
+     *
+     */
     @Override
     public void interpret() {
         super.interpret();

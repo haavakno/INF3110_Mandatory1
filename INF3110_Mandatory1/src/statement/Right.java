@@ -7,12 +7,23 @@ package statement;
 import expression.Number;
 import interfaces.IExpression;
 
+/**
+ *
+ * @author haavakno
+ */
 public class Right extends Move {
 
+    /**
+     *
+     * @param exp
+     */
     public Right(IExpression exp) {
         super(exp);
     }
     
+    /**
+     *
+     */
     @Override
     public void interpret() {
         super.interpret();

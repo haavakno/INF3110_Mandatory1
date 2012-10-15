@@ -1,13 +1,10 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package expression;
 
 import interfaces.IExpression;
 
 /**
- *
+ * A Robol expression.
+ * 
  * @author haavakno
  */
 abstract class Expression implements IExpression {
@@ -15,16 +12,24 @@ abstract class Expression implements IExpression {
     private boolean printed = false;
     private boolean evaluated = false;
     
+    /**
+     * 
+     */
     @Override
     public void interpret() {
-   //     prettyPrint();
+        
     }
-    
+    /**
+     * @see interfaces.IPrettyPrint
+     */
     @Override
     public void setPrinted() {
         this.printed = true;
     }
     
+    /**
+     * @see interfaces.IPrettyPrint
+     */
     @Override
     public void prettyPrint() {
         if (!printed) {
@@ -33,10 +38,20 @@ abstract class Expression implements IExpression {
         }
     }
     
+    /**
+     * Marks this expression as evaluated/not evaluated.
+     * 
+     * @param value boolean value.
+     */
     public void setEvaluated(boolean value) {
         this.evaluated = value;
     }
     
+    /**
+     * Checks if this expression has been evaluated.
+     * 
+     * @return boolean value.
+     */
     protected boolean isEvaluated() {
         return this.evaluated;
     }

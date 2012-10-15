@@ -12,11 +12,21 @@ import interfaces.IRobot;
 import expression.Number;
 
 
+/**
+ *
+ * @author haavakno
+ */
 public class Start extends Statement {
 
     IExpression exp1, exp2;
     Direction direction;
     
+    /**
+     *
+     * @param exp1
+     * @param exp2
+     * @param direction
+     */
     public Start(IExpression exp1, IExpression exp2, Direction direction) {
         super();
         this.exp1 = exp1;
@@ -24,6 +34,9 @@ public class Start extends Statement {
         this.direction = direction;
     }
     
+    /**
+     *
+     */
     @Override
     public void interpret() {
         super.interpret();

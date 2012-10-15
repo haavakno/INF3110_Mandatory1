@@ -18,11 +18,19 @@ public class StatementList implements Handler, Iterable<IStatement> {
     private final Collection<IStatement> statementList = new LinkedList<IStatement>();
     private boolean printed = false;
     
+    /**
+     *
+     * @param statement
+     * @return
+     */
     public StatementList addStatement(IStatement statement) {
         this.statementList.add(statement);
         return this;
     }
     
+    /**
+     *
+     */
     @Override
     public void interpret() {
         prettyPrint();
@@ -31,6 +39,9 @@ public class StatementList implements Handler, Iterable<IStatement> {
         }
     }
 
+    /**
+     *
+     */
     @Override
     public void prettyPrint() {
         if (!printed) {
@@ -39,6 +50,9 @@ public class StatementList implements Handler, Iterable<IStatement> {
         }
     }
 
+    /**
+     *
+     */
     @Override
     public void setPrinted() {
         this.printed = true;

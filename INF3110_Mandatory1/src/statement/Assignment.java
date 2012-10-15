@@ -9,16 +9,28 @@ import interfaces.IExpression;
 import program.Robot;
 
 
+/**
+ *
+ * @author haavakno
+ */
 public class Assignment extends Statement {
     
     private Identifier identifier;
     private IExpression exp;
     
+    /**
+     *
+     * @param identifier
+     * @param exp
+     */
     public Assignment(Identifier identifier, IExpression exp) {
         this.identifier = identifier;
         this.exp = exp;
     }
     
+    /**
+     *
+     */
     @Override
     public void interpret() {
         super.interpret();
